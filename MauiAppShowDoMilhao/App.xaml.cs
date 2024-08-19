@@ -4,9 +4,9 @@ namespace MauiAppShowDoMilhao
 {
     public partial class App : Application
     {
-        
-        
-            List<Pergunta> perguntas_faceis = new()
+
+
+        static List<Pergunta> perguntas_faceis = new()
             {
                 new Pergunta
                 {
@@ -20,7 +20,7 @@ namespace MauiAppShowDoMilhao
                         new Alternativa { Correta = false, Descricao = "Goiás" },
                     }
                 },
-                new Pergunta 
+                new Pergunta
                 {
                     Id= 2,
                     Enunciado = "Qual é o nome dado ao estado da água em forma de gelo?",
@@ -249,7 +249,8 @@ namespace MauiAppShowDoMilhao
                     }
                 }
             };
-            List<Pergunta> perguntas_medias = new()
+
+        static List<Pergunta> perguntas_medias = new()
             {
                 new Pergunta
                 {
@@ -492,7 +493,8 @@ namespace MauiAppShowDoMilhao
                     }
                 }
             };
-            List<Pergunta> perguntas_dificeis = new()
+
+        static List<Pergunta> perguntas_dificeis = new()
             {
                 new Pergunta
                 {
@@ -736,6 +738,30 @@ namespace MauiAppShowDoMilhao
                 },
             };
 
+        public static Pergunta getRandomPerguntaFacil()
+        {
+            Random r = new Random();
+
+            int sorteado = r.Next(1, perguntas_faceis.Count);
+
+            return perguntas_faceis[sorteado];
+        }
+
+        public static Pergunta getRandomPerguntaMedia()
+        {
+            Random r = new Random();
+
+            int sorteado = r.Next(21, perguntas_medias.Count);
+
+            return perguntas_medias[sorteado];
+        }
+
+        public static Pergunta getRandomPerguntaDificil()
+        {
+            Random r = new Random();
+            int sorteado = r.Next(41, perguntas_dificeis.Count);
+            return perguntas_dificeis[sorteado];
+        }
 
         public App()
         {
