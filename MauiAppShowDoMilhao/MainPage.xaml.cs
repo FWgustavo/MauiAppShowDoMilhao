@@ -60,7 +60,7 @@ namespace MauiAppShowDoMilhao
 
         void avanca_pergunta()
         {
-            if (pergunta_count <= 5) 
+            if (pergunta_count <= 5)
             {
                 premio = premio + 1000;
                 this.BindingContext = App.getRandomPerguntaFacil();
@@ -70,6 +70,7 @@ namespace MauiAppShowDoMilhao
                 premio = premio + 10000;
                 this.BindingContext = App.getRandomPerguntaMedia();
             }
+        }
     }
 
 }

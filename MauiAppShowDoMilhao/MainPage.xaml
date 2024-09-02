@@ -4,6 +4,16 @@
              x:Class="MauiAppShowDoMilhao.MainPage">
 
     <StackLayout Spacing="10" Margin="10">
+        <Grid ColumnDefinitions="*, *, *"
+              RowDefinitions="Auto, Auto" >
+            <Label Grid.Column="0" Text="Prêmio:" />
+            <Label Grid.Column="1" Text="Nível:" />
+            <Label Grid.Column="2" Text="Número da Pergunta:" />
+
+            <Label Grid.Column="0" Grid.Row="1" x:Name="lbl_premio" />
+            <Label Grid.Column="1" Grid.Row="1" x:Name="lbl_nivel" />
+            <Label Grid.Column="2" Grid.Row="1" x:Name="lbl_pergunta_numero" />
+        </Grid>
         <Button Text="Sortear Fácil" Clicked="Button_Clicked" />
         <Label Text="{Binding Enunciado}" />
         <StackLayout>
