@@ -1,4 +1,7 @@
-﻿using MauiAppShowDoMilhao.Models;
+﻿using Android.Media;
+using Java.Nio.FileNio;
+using MauiAppShowDoMilhao.Models;
+using Plugin.Maui.Audio;
 
 namespace MauiAppShowDoMilhao
 {
@@ -10,15 +13,98 @@ namespace MauiAppShowDoMilhao
         public MainPage()
         {
             InitializeComponent();
+
+            this.BindingContext = App.getRandomPerguntaFacil();
+
+            lbl_nivel.Text = "Fácil";
+            lbl_premio.Text = premio.ToString("C");
+            lbl_pergunta_numero.Text = premio.ToString();
+
+            // add som de abertura
+            Stream track = FileSystem.OpenAppPackageFileAsync("0.mp3").Result;
+            AudioManager.Current.CreatePlayer(track).Play();   
         }
 
+        private void toca_som()
+        {
+            string track = "";
+
+            switch (pergunta_count) 
+            {
+
+                case 1:
+                    track = "1.wav";
+                break;
+
+                case 2:
+                    track = "2.wav";
+                break;
+
+                case 3:
+                    track = "3.wav";
+                break;
+                   
+                case 4:
+                    track = "4.wav";
+                break;
+
+                case 5:
+                    track = "5.wav";
+                break;
+
+                case 6:
+                    track = "6.wav";
+                break;
+
+                case 7:
+                    track = "7.wav";
+                break;
+
+                case 8:
+                    track = "8.wav";
+                break;
+
+                case 9:
+                    track = "9.wav";
+                break;
+
+                case 10:
+                    track = "10.wav";
+                break;
+
+                case 11:
+                    track = "11.wav";
+                break;
+
+                case 12:
+                    track = "12.wav";
+                break;
+
+                case 13:
+                    track = "13.wav";
+                break;
+
+                case 14:
+                    track = "14.wav";
+                break;
+
+                case 15:
+                    track = "15.wav";
+                break;
+
+                case 16:
+                    track = "16.wav";
+                break;
+            }
+
+            AudioManager.Current.CreatePlayer(FileSystem.OpenAppPackageFileAsync(track).Result).Play();
 
         private void Button_Clicked(object sender, EventArgs e)
         {
             this.BindingContext = App.getRandomPerguntaFacil();
         }
 
-        private void Button_Clicked_Proxima(object sender, EventArgs e)
+        private async void Button_Clicked_Proxima(object sender, EventArgs e)
         {
             string texto_alternativa = "";
 
@@ -50,12 +136,22 @@ namespace MauiAppShowDoMilhao
 
             if (resposta_correta) 
             {
-                this.BindingContext = App.getRandomPerguntaFacil();
-                DisplayAlert("Acertou", texto_alternativa, "Próxima");
+                Stream track = FileSystem.OpenAppPackageFileAsync("parabens.wav").Result;
+                AudioManager.Current.CreatePlayer(track).Play();
+
+                    await DisplayAlert("ACERTOU!", resp, "OK");
+                    pergunta_count++;
+                    toca_som();
+                    avanca_pergunta();
             }
             else
             {
-                DisplayAlert("Errou", "Burro", "Tentar Novamente");
+                    Stream track = FileSystem.OpenAppPackageFileAsync("errou.wav").Result;
+                    AudioManager.Current.CreatePlayer(track ).Play();
+                await DisplayAlert("Errou", "Burro", "Tentar Novamente");
+                    premio = 0;
+                    pergunta_count = 1;
+                    avanca_pergunta();
             }
         }
 
